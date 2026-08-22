@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="microvision_web/figure_logo_bg/logo.png" alt="MicroVision logo" width="180">
-</p>
-
 <h1 align="center">MicroVision</h1>
 
 <p align="center">
@@ -64,11 +60,6 @@ MicroVision is built upon **MicroBench**, an instance-level particle formulation
 
 MicroBench preserves the visual complexity of real experiments, including class imbalance, within-class morphological heterogeneity, density variation, particle overlap, class co-occurrence, and imaging-domain shifts. These properties make it suitable for evaluating models under conditions that more closely resemble practical particle formulation analysis.
 
-<p align="center">
-  <img src="microvision_web/static/assets/about/microbench_dataset.jpg" alt="MicroBench dataset" width="48%">
-  <img src="microvision_web/static/assets/about/morphological_space.jpg" alt="MicroBench morphological space" width="48%">
-</p>
-
 The complete MicroBench training dataset will be released free of charge after publication of the associated research article.
 
 ---
@@ -86,11 +77,6 @@ Seven representative instance-segmentation implementations were evaluated using 
 - Mask R-CNN–R50–FPN implemented with Detectron2.
 
 The comparison considered overall segmentation accuracy, online and offline imaging domains, class-specific performance, strict-IoU mask quality, training-data scale, and deployment cost. The unified Detectron2 model achieved an overall mask mAP@0.5:0.95 of **0.766 ± 0.005** and was selected as the visual core of MicroVision.
-
-<p align="center">
-  <img src="microvision_web/static/assets/about/model_benchmarking.jpg" alt="Model benchmarking" width="48%">
-  <img src="microvision_web/static/assets/about/model_comparison.jpg" alt="Model comparison" width="48%">
-</p>
 
 ---
 
@@ -252,32 +238,6 @@ If the released model uses a different filename, update `DEFAULT_WEIGHTS` in `mi
 python -c "import torch, cv2, pandas, fastapi, uvicorn; import detectron2; print('PyTorch:', torch.__version__); print('CUDA available:', torch.cuda.is_available()); print('Detectron2:', detectron2.__version__)"
 ffmpeg -version
 ```
-
----
-
-## Starting the Web Application
-
-Run the application from the repository root:
-
-```bash
-cd /path/to/detectron2_MicroVision
-export MICROVISION_DEVICE=cuda:0
-python -m uvicorn microvision_web.app:app --host 0.0.0.0 --port 8008
-```
-
-Open the following address in a browser:
-
-```text
-http://127.0.0.1:8008
-```
-
-For development, automatic reloading can be enabled:
-
-```bash
-python -m uvicorn microvision_web.app:app --host 0.0.0.0 --port 8008 --reload
-```
-
-Do not use `--reload` for a production GPU inference service. The current application uses an in-process task queue and a preloaded model. A production deployment should therefore use a single Uvicorn worker, with systemd, Supervisor, or a container platform managing the process externally.
 
 ---
 
